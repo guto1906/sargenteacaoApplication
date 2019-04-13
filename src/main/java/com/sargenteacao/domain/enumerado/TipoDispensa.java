@@ -1,14 +1,13 @@
-package com.sargenteacao.enumerado;
+package com.sargenteacao.domain.enumerado;
 
-public enum AutoridadeConcedente {
-	CMTOM(1, "Comandante de OM"),
-	CMTSU(2, "Comandante de SU"),
-	CHSEC(3, "Chefe de Seção");
+public enum TipoDispensa {
+	DESCONTOFERIAS(1, "Desconto em Férias"),
+	RECOMPENSA(2, "Recompensa");
 	
 	private int cod;
 	private String descricao;
 	
-	private AutoridadeConcedente(int cod, String descricao) {
+	private TipoDispensa(int cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 	}
@@ -21,11 +20,11 @@ public enum AutoridadeConcedente {
 		return descricao;
 	}
 	
-	public static AutoridadeConcedente toEnum(Integer id) {
+	public static TipoDispensa toEnum(Integer id) {
 		if (id == null) {
 			return null;
 		}
-		for (AutoridadeConcedente x : AutoridadeConcedente.values()) {
+		for (TipoDispensa x : TipoDispensa.values()) {
 			if (id.equals(x.getCod())) {
 				return x;
 			}

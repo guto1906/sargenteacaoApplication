@@ -1,4 +1,4 @@
-package com.sargenteacao.enumerado;
+package com.sargenteacao.domain.enumerado;
 
 public enum TipoFolga {
 	PRETA(1, "Preta"),

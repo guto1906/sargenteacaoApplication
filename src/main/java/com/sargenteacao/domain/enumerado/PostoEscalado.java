@@ -1,4 +1,4 @@
-package com.sargenteacao.enumerado;
+package com.sargenteacao.domain.enumerado;
 
 public enum PostoEscalado {
 	SGTDIA(1, "Sargento de Dia"),
