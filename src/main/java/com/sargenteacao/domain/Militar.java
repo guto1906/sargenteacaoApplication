@@ -9,7 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import com.sargenteacao.domain.enumerado.PostGrad;
 
 @Entity
 public class Militar implements Serializable{
@@ -30,16 +35,24 @@ public class Militar implements Serializable{
 	private String endereco;
 	private String telefone;
 	private Boolean pronto;
+	private Integer postGrad;
 	
 	@OneToMany(mappedBy = "designado")
 	private List<ServicoEscala> servicos = new ArrayList<>();
+	
+	@ManyToMany
+	@JoinTable(name = "Militar_Missao",
+		joinColumns = @JoinColumn(name = "Militar_id"),
+		inverseJoinColumns = @JoinColumn(name="Missao_id")
+			)
+	private List<Missao> missoes = new ArrayList<>();
 	
 	Militar(){
 		
 	}
 
 	public Militar(Integer id, Integer antiguidade, String nome, String nomeGuerra, String identidade, String cpf,
-			String nomePai, String nomeMae, Date dataNascimento, String endereco, String telefone, Boolean pronto) {
+			String nomePai, String nomeMae, Date dataNascimento, String endereco, String telefone, Boolean pronto, PostGrad postGrad) {
 		super();
 		this.id = id;
 		this.antiguidade = antiguidade;
@@ -53,6 +66,7 @@ public class Militar implements Serializable{
 		this.endereco = endereco;
 		this.telefone = telefone;
 		this.pronto = pronto;
+		this.postGrad = postGrad.getCod();
 	}
 
 	public Integer getId() {
@@ -157,8 +171,25 @@ public class Militar implements Serializable{
 
 	public void setServicos(List<ServicoEscala> servicos) {
 		this.servicos = servicos;
+	}	
+
+	public PostGrad getPostGrad() {
+		return PostGrad.toEnum(postGrad);
 	}
 
+	public void setPostGrad(PostGrad postGrad) {
+		this.postGrad = postGrad.getCod();
+	}	
+
+	public List<Missao> getMissoes() {
+		return missoes;
+	}
+
+	public void setMissoes(List<Missao> missoes) {
+		this.missoes = missoes;
+	}
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
