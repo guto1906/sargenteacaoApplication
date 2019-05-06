@@ -9,12 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.sargenteacao.domain.enumerado.PostGrad;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sargenteacao.domain.enums.PostGrad;
 
 @Entity
 public class Militar implements Serializable{
@@ -31,23 +31,23 @@ public class Militar implements Serializable{
 	private String cpf;
 	private String nomePai;
 	private String nomeMae;
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataNascimento;
 	private String endereco;
 	private String telefone;
 	private Boolean pronto;
 	private Integer postGrad;
 	
-	@OneToMany(mappedBy = "designado")
-	private List<ServicoEscala> servicos = new ArrayList<>();
-	
-	@ManyToMany
-	@JoinTable(name = "Militar_Missao",
-		joinColumns = @JoinColumn(name = "Militar_id"),
-		inverseJoinColumns = @JoinColumn(name="Missao_id")
-			)
+	@ManyToMany(mappedBy = "militares")
+	@JsonIgnore
 	private List<Missao> missoes = new ArrayList<>();
 	
-	Militar(){
+	@OneToMany(mappedBy = "escalado")
+	@JsonIgnore
+	private List<EscalaServico> servicos = new ArrayList<>();
+	
+	
+	public Militar(){
 		
 	}
 
@@ -165,22 +165,14 @@ public class Militar implements Serializable{
 		this.pronto = pronto;
 	}
 
-	public List<ServicoEscala> getServicos() {
-		return servicos;
-	}
-
-	public void setServicos(List<ServicoEscala> servicos) {
-		this.servicos = servicos;
-	}	
-
 	public PostGrad getPostGrad() {
 		return PostGrad.toEnum(postGrad);
 	}
 
 	public void setPostGrad(PostGrad postGrad) {
 		this.postGrad = postGrad.getCod();
-	}	
-
+	}
+	
 	public List<Missao> getMissoes() {
 		return missoes;
 	}
@@ -188,8 +180,15 @@ public class Militar implements Serializable{
 	public void setMissoes(List<Missao> missoes) {
 		this.missoes = missoes;
 	}
-
 	
+	public List<EscalaServico> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<EscalaServico> servicos) {
+		this.servicos = servicos;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

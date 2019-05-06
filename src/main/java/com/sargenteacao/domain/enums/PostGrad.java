@@ -1,4 +1,4 @@
-package com.sargenteacao.domain.enumerado;
+package com.sargenteacao.domain.enums;
 
 public enum PostGrad {
 	GENEX(1, "Gen Ex"),

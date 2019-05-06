@@ -10,39 +10,39 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.sargenteacao.domain.enumerado.PostoEscalado;
-import com.sargenteacao.domain.enumerado.TipoFolga;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sargenteacao.domain.enums.PostoEscalado;
+import com.sargenteacao.domain.enums.TipoFolga;
 
 @Entity
-public class ServicoEscala implements Serializable{
+public class EscalaServico implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date data;
-	private Militar substituto;
 	private Integer postoEscaldo;
 	private Integer tipoFolga;
 	
 	@ManyToOne
-	@JoinColumn(name = "designado_id")
-	private Militar designado;
+	@JoinColumn(name = "militar_escalado_id")
+	private Militar escalado;
 	
-	public ServicoEscala() {
+	public EscalaServico() {
 		
 	}
 
-	public ServicoEscala(Integer id, Date data, Militar substituto, PostoEscalado postoEscaldo, TipoFolga tipoFolga,
-			Militar designado) {
+	public EscalaServico(Integer id, Date data, PostoEscalado postoEscaldo, TipoFolga tipoFolga, Militar escalado) {
 		super();
 		this.id = id;
 		this.data = data;
-		this.substituto = substituto;
 		this.postoEscaldo = postoEscaldo.getCod();
 		this.tipoFolga = tipoFolga.getCod();
-		this.designado = designado;
+		this.escalado = escalado;
+		
 	}
 
 	public Integer getId() {
@@ -61,14 +61,6 @@ public class ServicoEscala implements Serializable{
 		this.data = data;
 	}
 
-	public Militar getSubstituto() {
-		return substituto;
-	}
-
-	public void setSubstituto(Militar substituto) {
-		this.substituto = substituto;
-	}
-
 	public PostoEscalado getPostoEscaldo() {
 		return PostoEscalado.toEnum(postoEscaldo);
 	}
@@ -84,13 +76,13 @@ public class ServicoEscala implements Serializable{
 	public void setTipoFolga(TipoFolga tipoFolga) {
 		this.tipoFolga = tipoFolga.getCod();
 	}
-
-	public Militar getDesignado() {
-		return designado;
+	
+	public Militar getEscalado() {
+		return escalado;
 	}
 
-	public void setDesignado(Militar designado) {
-		this.designado = designado;
+	public void setEscalado(Militar escalado) {
+		this.escalado = escalado;
 	}
 
 	@Override
@@ -109,7 +101,7 @@ public class ServicoEscala implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ServicoEscala other = (ServicoEscala) obj;
+		EscalaServico other = (EscalaServico) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

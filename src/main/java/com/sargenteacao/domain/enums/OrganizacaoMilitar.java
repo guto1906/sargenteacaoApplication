@@ -1,16 +1,12 @@
-package com.sargenteacao.domain.enumerado;
+package com.sargenteacao.domain.enums;
 
-public enum TipoPunicao {
-	PRISAO(1, "Prisão"),
-	DETIMENTO(2, "Detimento"),
-	IMPEDIMENTO(3, "Impedimento"),
-	REPREENSÃO(4, "Repreensão"),
-	ADVERTÊNCIA(5, "Advertência");
+public enum OrganizacaoMilitar {
+	SEGUNDOGAAAE(55426, "2 GAAAe");	
 	
 	private int cod;
 	private String descricao;
 	
-	private TipoPunicao(int cod, String descricao) {
+	private OrganizacaoMilitar(int cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 	}
@@ -23,11 +19,11 @@ public enum TipoPunicao {
 		return descricao;
 	}
 	
-	public static TipoPunicao toEnum(Integer id) {
+	public static OrganizacaoMilitar toEnum(Integer id) {
 		if (id == null) {
 			return null;
 		}
-		for (TipoPunicao x : TipoPunicao.values()) {
+		for (OrganizacaoMilitar x : OrganizacaoMilitar.values()) {
 			if (id.equals(x.getCod())) {
 				return x;
 			}

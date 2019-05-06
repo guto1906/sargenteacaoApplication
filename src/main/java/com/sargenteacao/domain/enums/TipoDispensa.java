@@ -1,15 +1,13 @@
-package com.sargenteacao.domain.enumerado;
+package com.sargenteacao.domain.enums;
 
-public enum PostoEscalado {
-	SGTDIA(1, "Sargento de Dia"),
-	CBDIA(2, "Cabo de Dia"),
-	PLANTAO(3, "Plantão"),
-	GUARDA(4, "Guarda");
+public enum TipoDispensa {
+	DESCONTOFERIAS(1, "Desconto em Férias"),
+	RECOMPENSA(2, "Recompensa");
 	
 	private int cod;
 	private String descricao;
 	
-	private PostoEscalado(int cod, String descricao) {
+	private TipoDispensa(int cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 	}
@@ -22,11 +20,11 @@ public enum PostoEscalado {
 		return descricao;
 	}
 	
-	public static PostoEscalado toEnum(Integer id) {
+	public static TipoDispensa toEnum(Integer id) {
 		if (id == null) {
 			return null;
 		}
-		for (PostoEscalado x : PostoEscalado.values()) {
+		for (TipoDispensa x : TipoDispensa.values()) {
 			if (id.equals(x.getCod())) {
 				return x;
 			}

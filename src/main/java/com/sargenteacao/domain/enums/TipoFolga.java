@@ -1,12 +1,13 @@
-package com.sargenteacao.domain.enumerado;
+package com.sargenteacao.domain.enums;
 
-public enum OrganizacaoMilitar {
-	SEGUNDOGAAAE(55426, "2 GAAAe");	
+public enum TipoFolga {
+	PRETA(1, "Preta"),
+	VERMELHA(2, "Vermelha");
 	
 	private int cod;
 	private String descricao;
 	
-	private OrganizacaoMilitar(int cod, String descricao) {
+	private TipoFolga(int cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 	}
@@ -19,11 +20,11 @@ public enum OrganizacaoMilitar {
 		return descricao;
 	}
 	
-	public static OrganizacaoMilitar toEnum(Integer id) {
+	public static TipoFolga toEnum(Integer id) {
 		if (id == null) {
 			return null;
 		}
-		for (OrganizacaoMilitar x : OrganizacaoMilitar.values()) {
+		for (TipoFolga x : TipoFolga.values()) {
 			if (id.equals(x.getCod())) {
 				return x;
 			}

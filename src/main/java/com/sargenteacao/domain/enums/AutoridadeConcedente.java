@@ -1,4 +1,4 @@
-package com.sargenteacao.domain.enumerado;
+package com.sargenteacao.domain.enums;
 
 public enum AutoridadeConcedente {
 	CMTOM(1, "Comandante de OM"),

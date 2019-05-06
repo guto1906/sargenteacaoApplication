@@ -9,7 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Missao implements Serializable{
@@ -20,10 +24,15 @@ public class Missao implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataInicio;
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataTermino;
 	
-	@ManyToMany(mappedBy = "missoes")
+	@ManyToMany
+	@JoinTable(name = "Missao_Militar",
+	joinColumns = @JoinColumn(name = "id_missao"),
+	inverseJoinColumns = @JoinColumn(name = "id_militar"))
 	private List<Militar> militares = new ArrayList<>();
 	
 	public Missao() {
@@ -68,8 +77,8 @@ public class Missao implements Serializable{
 
 	public void setDataTermino(Date dataTermino) {
 		this.dataTermino = dataTermino;
-	}
-		
+	}		
+	
 	public List<Militar> getMilitares() {
 		return militares;
 	}
