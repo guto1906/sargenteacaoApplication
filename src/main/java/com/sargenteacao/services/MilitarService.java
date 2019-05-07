@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.sargenteacao.domain.Militar;
 import com.sargenteacao.repositories.MilitarRepository;
+import com.sargenteacao.services.exceptions.NoSuchElementException;
 
 @Service
 public class MilitarService {
@@ -15,8 +16,9 @@ public class MilitarService {
 	private MilitarRepository militarRepository;
 	
 	public Militar findById(Integer id) {
-		Optional<Militar> obj = militarRepository.findById(id);		
-		return obj.orElse(null);
+		Optional<Militar> obj = militarRepository.findById(id);
+		return obj.orElseThrow(()-> new NoSuchElementException("Elemento de Id "+id+" não existe"));
+		
 	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.sargenteacao.domain.Missao;
 import com.sargenteacao.repositories.MissaoRepository;
+import com.sargenteacao.services.exceptions.NoSuchElementException;
 
 @Service
 public class MissaoService {
@@ -16,7 +17,7 @@ public class MissaoService {
 	
 	public Missao buscar(Integer id) {
 		Optional<Missao> obj = repo.findById(id);		
-		return obj.orElse(null);
+		return obj.orElseThrow(()-> new NoSuchElementException("Elemento de Id "+id+" não existe"));
 	}
 
 }
