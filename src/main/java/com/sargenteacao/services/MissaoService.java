@@ -15,7 +15,7 @@ public class MissaoService {
 	@Autowired
 	private MissaoRepository repo;
 	
-	public Missao buscar(Integer id) {
+	public Missao findById(Integer id) {
 		Optional<Missao> obj = repo.findById(id);		
 		return obj.orElseThrow(()-> new NoSuchElementException("Elemento de Id "+id+" não existe"));
 	}

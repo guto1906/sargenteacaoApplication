@@ -67,7 +67,7 @@ public class SargenteacaoApplication implements CommandLineRunner{
 		
 		militar01.setServicos(Arrays.asList(escala01, escala04));
 		militar02.setServicos(Arrays.asList(escala02));
-		militar03.setServicos(Arrays.asList(escala03));
+		militar03  .setServicos(Arrays.asList(escala03));
 		
 		militarRepository.saveAll(Arrays.asList(militar01,militar02,militar03,militar04,militar05,militar06));
 		missaoRepository.saveAll(Arrays.asList(missao1,missao2, missao3));

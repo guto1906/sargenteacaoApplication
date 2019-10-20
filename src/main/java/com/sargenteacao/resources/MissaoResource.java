@@ -19,7 +19,7 @@ public class MissaoResource {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> findById (@PathVariable Integer id){
-		Missao obj = missaoService.buscar(id);
+		Missao obj = missaoService.findById(id);
 		return ResponseEntity.ok().body(obj);
 		
 	}
